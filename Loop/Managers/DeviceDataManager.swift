@@ -271,6 +271,47 @@ class DeviceDataManager: CarbStoreDelegate, TransmitterDelegate {
             }
         }
     }
+    
+    /**
+     Read the pump's current battery voltage and clock
+     
+     - parameter completion: A closure called after the command is complete. This closure takes a single Result argument:
+     - Success(voltage, date): The current battery voltage, in volts, and date according to the pump's clock
+     - Failure(error): An error describing why the command failed
+     */
+    private func readBatteryVoltage(completion: (Either<(voltage: Double, status: String, date: NSDate), ErrorType>) -> Void) {
+        guard let device = rileyLinkManager.firstConnectedDevice, ops = device.ops else {
+            completion(.Failure(LoopError.ConfigurationError))
+            return
+        }
+        
+        ops.getBatteryVoltage { (result) in
+            switch result {
+            case .Success(let getbatteryvoltage):
+                ops.readTime { (result) in
+                    switch result {
+                    case .Success(let components):
+                        components.timeZone = ops.pumpState.timeZone
+                        
+                        guard let date = components.date else {
+                            self.logger.addError("Could not interpret clock", fromSource: "RileyLink")
+                            completion(.Failure(LoopError.ConfigurationError))
+                            return
+                        }
+                        
+                        completion(.Success((voltage : getbatteryvoltage.volts, status: getbatteryvoltage.status, date: date)))
+                            
+                    case .Failure(let error):
+                        self.logger.addError("Failed to fetch clock: \(error)", fromSource: "RileyLink")
+                        completion(.Failure(error))
+                    }
+                }
+            case .Failure(let error):
+                self.logger.addError("Failed to fetch voltage: \(error)", fromSource: "RileyLink")
+                completion(.Failure(error))
+            }
+        }
+    }
 
     /**
      Ensures pump data is current by either waking and polling, or ensuring we're listening to sentry packets.
