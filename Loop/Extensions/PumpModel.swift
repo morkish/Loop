@@ -14,7 +14,7 @@ extension PumpModel {
         return Int(rawValue)! / 100
     }
     
-    var reservoirCapacity: Int {
+    var reservoirCapacity: Double {
         switch size {
         case 5:
             return 176
