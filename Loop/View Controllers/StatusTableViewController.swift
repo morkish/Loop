@@ -431,6 +431,7 @@ class StatusTableViewController: UITableViewController, UIGestureRecognizerDeleg
 
             switch ChartRow(rawValue: indexPath.row)! {
             case .Glucose:
+                cell.chartTitle.text = "Glucose"
                 if let chart = charts.glucoseChartWithFrame(frame) {
                     cell.chartView = chart.view
                 } else {
@@ -438,6 +439,7 @@ class StatusTableViewController: UITableViewController, UIGestureRecognizerDeleg
                     // TODO: Display empty state
                 }
             case .IOB:
+                cell.chartTitle.text = "Insulin On Board"
                 if let chart = charts.IOBChartWithFrame(frame) {
                     cell.chartView = chart.view
                 } else {
@@ -445,6 +447,7 @@ class StatusTableViewController: UITableViewController, UIGestureRecognizerDeleg
                     // TODO: Display empty state
                 }
             case .Dose:
+                cell.chartTitle.text = "Dosing"
                 if let chart = charts.doseChartWithFrame(frame) {
                     cell.chartView = chart.view
                 } else {
@@ -452,6 +455,7 @@ class StatusTableViewController: UITableViewController, UIGestureRecognizerDeleg
                     // TODO: Display empty state
                 }
             case .COB:
+                cell.chartTitle.text = "Carbs On Board"
                 if let chart = charts.COBChartWithFrame(frame) {
                     cell.chartView = chart.view
                 } else {

@@ -337,6 +337,9 @@ class DeviceDataManager: CarbStoreDelegate, TransmitterDelegate {
                 }
             }
         }
+        //x22 pumps If we dont yet have battery data or it's old poll for it.  
+        //battery is stored as percentage remaining normally but we will create a class to store battery voltage, percent, and date read.
+        
     }
 
     /**

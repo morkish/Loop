@@ -10,6 +10,8 @@ import UIKit
 
 class ChartTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var chartTitle: UILabel!
+    
     var chartView: UIView? {
         didSet {
             if let view = oldValue {
