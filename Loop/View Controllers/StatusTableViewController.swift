@@ -209,7 +209,7 @@ class StatusTableViewController: UITableViewController, UIGestureRecognizerDeleg
 			
             if let capacity = dataManager.pumpState?.pumpModel?.reservoirCapacity,
                 resVol = reservoirVolume {
-                reservoirLevel = min(1, max(0, Double(resVol / capacity)))
+                reservoirLevel = min(1, max(0, Double(resVol / Double(capacity))))
             }
             
             if let status = dataManager.latestPumpStatus {
@@ -744,11 +744,14 @@ class StatusTableViewController: UITableViewController, UIGestureRecognizerDeleg
     }
 
     @IBAction func toggleWorkoutMode(sender: UIBarButtonItem) {
-        // TODO: Display an action sheet to select a duration
         if let workoutModeEnabled = workoutMode where workoutModeEnabled {
             dataManager.disableWorkoutMode()
         } else {
-            dataManager.enableWorkoutMode(duration: NSTimeInterval(hours: 1))
+            let vc = UIAlertController(workoutDurationSelectionHandler: { (endDate) in
+                self.dataManager.enableWorkoutMode(until: endDate)
+            })
+
+            presentViewController(vc, animated: true, completion: nil)
         }
     }
 
