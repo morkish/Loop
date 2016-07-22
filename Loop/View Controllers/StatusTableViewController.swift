@@ -432,6 +432,7 @@ class StatusTableViewController: UITableViewController, UIGestureRecognizerDeleg
             switch ChartRow(rawValue: indexPath.row)! {
             case .Glucose:
                 cell.chartTitle.text = "Glucose"
+                cell.chartCurrentVal.text = "200→"
                 if let chart = charts.glucoseChartWithFrame(frame) {
                     cell.chartView = chart.view
                 } else {
@@ -440,6 +441,7 @@ class StatusTableViewController: UITableViewController, UIGestureRecognizerDeleg
                 }
             case .IOB:
                 cell.chartTitle.text = "Insulin On Board"
+                cell.chartCurrentVal.text = nil
                 if let chart = charts.IOBChartWithFrame(frame) {
                     cell.chartView = chart.view
                 } else {
@@ -448,6 +450,7 @@ class StatusTableViewController: UITableViewController, UIGestureRecognizerDeleg
                 }
             case .Dose:
                 cell.chartTitle.text = "Dosing"
+                cell.chartCurrentVal.text = nil
                 if let chart = charts.doseChartWithFrame(frame) {
                     cell.chartView = chart.view
                 } else {
@@ -456,6 +459,7 @@ class StatusTableViewController: UITableViewController, UIGestureRecognizerDeleg
                 }
             case .COB:
                 cell.chartTitle.text = "Carbs On Board"
+                cell.chartCurrentVal.text = nil
                 if let chart = charts.COBChartWithFrame(frame) {
                     cell.chartView = chart.view
                 } else {

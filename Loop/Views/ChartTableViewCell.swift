@@ -11,6 +11,7 @@ import UIKit
 class ChartTableViewCell: UITableViewCell {
 
     @IBOutlet weak var chartTitle: UILabel!
+    @IBOutlet weak var chartCurrentVal: UILabel!
     
     var chartView: UIView? {
         didSet {
