@@ -123,6 +123,10 @@ SWIFT_CLASS("_TtC12RileyLinkKit34RileyLinkDeviceTableViewController")
 @interface RileyLinkDeviceTableViewController : UITableViewController
 - (void)viewDidLoad;
 - (void)viewWillAppear:(BOOL)animated;
+<<<<<<< HEAD
+=======
+- (void)viewWillDisappear:(BOOL)animated;
+>>>>>>> loudnate/dev
 - (NSInteger)numberOfSectionsInTableView:(UITableView * _Nonnull)tableView;
 - (NSInteger)tableView:(UITableView * _Nonnull)tableView numberOfRowsInSection:(NSInteger)section;
 - (UITableViewCell * _Nonnull)tableView:(UITableView * _Nonnull)tableView cellForRowAtIndexPath:(NSIndexPath * _Nonnull)indexPath;
