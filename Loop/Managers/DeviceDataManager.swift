@@ -336,10 +336,34 @@ class DeviceDataManager: CarbStoreDelegate, TransmitterDelegate {
                     self.troubleshootPumpCommsWithDevice(device)
                 }
             }
+            
+            // If this is an x22 pump read the battery here as well
+            readBatteryVoltage { (result) in
+                switch result {
+                case .Success(let (voltage,status,date)):
+                    var percentage: Int
+                    if voltage >= 1.54{                             //100%
+                        percentage = 100
+                    }else if voltage < 1.54 && voltage >= 1.48{     //75%
+                        percentage = 75
+                    }else if voltage < 1.48 && voltage >= 1.43{     //50%
+                        percentage = 50
+                    }else if voltage < 1.43 && voltage >= 1.37{     //25%
+                        percentage = 25
+                    }else if voltage < 1.37{                        //0%
+                        percentage = 0
+                    }else{
+                        percentage = 0
+                    }
+                    
+                    print("Battery Status on \(date) battery is \(status) with voltage of \(voltage)")
+                    print("Battery is \(percentage)% remaining ")
+                    
+                case .Failure:
+                    self.troubleshootPumpCommsWithDevice(device)
+                }
+            }
         }
-        //x22 pumps If we dont yet have battery data or it's old poll for it.  
-        //battery is stored as percentage remaining normally but we will create a class to store battery voltage, percent, and date read.
-        
     }
 
     /**

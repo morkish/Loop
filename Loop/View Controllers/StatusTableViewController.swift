@@ -432,7 +432,21 @@ class StatusTableViewController: UITableViewController, UIGestureRecognizerDeleg
             switch ChartRow(rawValue: indexPath.row)! {
             case .Glucose:
                 cell.chartTitle.text = "Glucose"
-                cell.chartCurrentVal.text = "200→"
+                cell.chartCurrentVal.text = nil
+                /*
+                if let glucoseStore = dataManager.glucoseStore, glucose = glucoseStore.latestGlucose {
+                    
+                    glucoseStore.preferredUnit { (unit, error) in
+                        guard let unit = unit, glucoseString = self.numberFormatter.stringFromNumber(glucose.quantity.doubleValueForUnit(unit)) else {
+                            return
+                        }
+                        
+                        dispatch_async(dispatch_get_main_queue()) {
+                            cell.chartCurrentVal.text = String(format: NSLocalizedString("%1$@ %2$@", comment: "Format string describing glucose: (1: quantity)(2: unit)"), glucoseString, unit.unitString)
+                        }
+                    }
+                }
+                */
                 if let chart = charts.glucoseChartWithFrame(frame) {
                     cell.chartView = chart.view
                 } else {
