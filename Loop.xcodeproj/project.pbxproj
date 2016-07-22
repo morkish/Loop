@@ -135,6 +135,7 @@
 		43F78D4E1C914197002152D1 /* InsulinKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43F78D4A1C914197002152D1 /* InsulinKit.framework */; };
 		43F78D4F1C914197002152D1 /* LoopKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43F78D4B1C914197002152D1 /* LoopKit.framework */; };
 		C10428971D17BAD400DD539A /* NightscoutUploadKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C10428961D17BAD400DD539A /* NightscoutUploadKit.framework */; };
+		C57343C21D42805E0033F47A /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C57343C11D42805E0033F47A /* Default-568h@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -349,6 +350,7 @@
 		43F78D4A1C914197002152D1 /* InsulinKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = InsulinKit.framework; path = Carthage/Build/iOS/InsulinKit.framework; sourceTree = "<group>"; };
 		43F78D4B1C914197002152D1 /* LoopKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LoopKit.framework; path = Carthage/Build/iOS/LoopKit.framework; sourceTree = "<group>"; };
 		C10428961D17BAD400DD539A /* NightscoutUploadKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NightscoutUploadKit.framework; path = Carthage/Build/iOS/NightscoutUploadKit.framework; sourceTree = "<group>"; };
+		C57343C11D42805E0033F47A /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -454,6 +456,7 @@
 		43776F831B8022E90074EA36 = {
 			isa = PBXGroup;
 			children = (
+				C57343C11D42805E0033F47A /* Default-568h@2x.png */,
 				43776F8E1B8022E90074EA36 /* Loop */,
 				43A943731B926B7B0051FA24 /* WatchApp */,
 				43A943821B926B7B0051FA24 /* WatchApp Extension */,
@@ -571,7 +574,6 @@
 		43E344A01B9E144300C85C07 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				C51F56111D3B91CD004C46ED /* PumpModel.swift */,
 				4331E0771C85302200FBE832 /* CGPoint.swift */,
 				4346D1F51C78501000ABAFE3 /* ChartPoint.swift */,
 				43649A621C7A347F00523D7F /* CollectionType.swift */,
@@ -866,6 +868,7 @@
 				434F54591D28805E002A9274 /* ButtonTableViewCell.xib in Resources */,
 				43776F971B8022E90074EA36 /* Main.storyboard in Resources */,
 				434F545B1D2880D4002A9274 /* AuthenticationTableViewCell.xib in Resources */,
+				C57343C21D42805E0033F47A /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
