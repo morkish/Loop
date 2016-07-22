@@ -294,8 +294,7 @@ class SettingsTableViewController: UITableViewController, DailyValueScheduleTabl
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch Section(rawValue: section)! {
         case .Loop:
-            let version = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString")!
-            return "Loop iOS v\(version)"
+            return nil
         case .Configuration:
             return NSLocalizedString("Configuration", comment: "The title of the configuration section in settings")
         case .Devices:
