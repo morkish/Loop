@@ -46,6 +46,16 @@ class DeviceDataManager: CarbStoreDelegate, TransmitterDelegate {
 
     // Timestamp of last event we've retrieved from pump
     var observingPumpEventsSince = NSDate(timeIntervalSinceNow: NSTimeInterval(hours: -24))
+    
+    // Battery Percentage for x22 Pumps based on ability to continue to broadcast
+    var x22BatteryBroadcastRemaining: Double
+    
+    // Battery Voltage Reading
+    var batteryVoltage: Double
+    
+    // Battery Status (Normal or Low)
+    var batteryStatus: String
+    
 
     /// The G5 transmitter object
     var transmitter: Transmitter? {
@@ -322,7 +332,38 @@ class DeviceDataManager: CarbStoreDelegate, TransmitterDelegate {
         }
 
         device.assertIdleListening()
-
+        
+        // If this is an x22 pump read the battery here as well
+        readBatteryVoltage { (result) in
+            switch result {
+            case .Success(let (voltage,status,date)):
+                var percentage: Double
+                if voltage >= 1.54{                             //100%
+                    percentage = 1
+                }else if voltage < 1.54 && voltage >= 1.48{     //75%
+                    percentage = 0.75
+                }else if voltage < 1.48 && voltage >= 1.43{     //50%
+                    percentage = 0.50
+                }else if voltage < 1.43 && voltage >= 1.37{     //25%
+                    percentage = 0.25
+                }else if voltage < 1.37{                        //0%
+                    percentage = 0
+                }else{
+                    percentage = -1
+                }
+                
+                print("Battery Status on \(date). Battery is \(status) with voltage of \(voltage)")
+                print("Battery is \(percentage)% of charge.")
+                
+                self.batteryVoltage = voltage
+                self.x22BatteryBroadcastRemaining = percentage
+                
+                
+            case .Failure:
+                self.troubleshootPumpCommsWithDevice(device)
+            }
+        }
+        
         // How long should we wait before we poll for new reservoir data?
         let reservoirTolerance = rileyLinkManager.idleListeningEnabled ? NSTimeInterval(minutes: 11) : NSTimeInterval(minutes: 4)
 
@@ -332,33 +373,6 @@ class DeviceDataManager: CarbStoreDelegate, TransmitterDelegate {
                 switch result {
                 case .Success(let (units, date)):
                     self.updateReservoirVolume(units, atDate: date, withTimeLeft: nil)
-                case .Failure:
-                    self.troubleshootPumpCommsWithDevice(device)
-                }
-            }
-            
-            // If this is an x22 pump read the battery here as well
-            readBatteryVoltage { (result) in
-                switch result {
-                case .Success(let (voltage,status,date)):
-                    var percentage: Int
-                    if voltage >= 1.54{                             //100%
-                        percentage = 100
-                    }else if voltage < 1.54 && voltage >= 1.48{     //75%
-                        percentage = 75
-                    }else if voltage < 1.48 && voltage >= 1.43{     //50%
-                        percentage = 50
-                    }else if voltage < 1.43 && voltage >= 1.37{     //25%
-                        percentage = 25
-                    }else if voltage < 1.37{                        //0%
-                        percentage = 0
-                    }else{
-                        percentage = 0
-                    }
-                    
-                    print("Battery Status on \(date) battery is \(status) with voltage of \(voltage)")
-                    print("Battery is \(percentage)% remaining ")
-                    
                 case .Failure:
                     self.troubleshootPumpCommsWithDevice(device)
                 }
@@ -872,6 +886,10 @@ class DeviceDataManager: CarbStoreDelegate, TransmitterDelegate {
 
     init() {
         let pumpID = NSUserDefaults.standardUserDefaults().pumpID
+        
+        self.batteryVoltage = -1
+        self.batteryStatus = "undefined"
+        self.x22BatteryBroadcastRemaining = -1
 
         doseStore = DoseStore(
             pumpID: pumpID,
