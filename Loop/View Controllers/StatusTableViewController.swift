@@ -213,7 +213,15 @@ class StatusTableViewController: UITableViewController, UIGestureRecognizerDeleg
                 reservoirLevel = min(1, max(0, Double(resVol / capacity)))
                 
                 if dataManager.x22BatteryBroadcastRemaining > -1 {
+                    
                     batteryLevel = dataManager.x22BatteryBroadcastRemaining
+                    
+                    let percentFormatter = NSNumberFormatter()
+                    percentFormatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
+                    percentFormatter.minimumFractionDigits = 2
+                    percentFormatter.maximumFractionDigits = 2
+                    let result = percentFormatter.stringFromNumber( dataManager.batteryVoltage)
+                    batteryVoltage.text = result! + "v"
                 }
             }
             
@@ -791,4 +799,6 @@ class StatusTableViewController: UITableViewController, UIGestureRecognizerDeleg
     @IBOutlet var reservoirVolumeHUD: ReservoirVolumeHUDView!
 
     @IBOutlet var batteryLevelHUD: BatteryLevelHUDView!
+    
+    @IBOutlet weak var batteryVoltage: UILabel!
 }

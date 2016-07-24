@@ -335,8 +335,12 @@
                                                         <constraint firstItem="b1s-XV-TWG" firstAttribute="centerY" secondItem="Jjc-jK-Vci" secondAttribute="centerY" id="fQm-zs-dL6"/>
                                                     </constraints>
                                                 </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1.54v" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IQ3-3i-AaT" userLabel="BatteryVoltage">
-                                                    <rect key="frame" x="8" y="28" width="134" height="14"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.54v" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IQ3-3i-AaT" userLabel="BatteryVoltage">
+                                                    <rect key="frame" x="53.5" y="28" width="44" height="14"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="14" id="ecF-OJ-jPE"/>
+                                                        <constraint firstAttribute="width" constant="44" id="jj0-vX-rB9"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -352,6 +356,8 @@
                                                 <constraint firstAttribute="trailingMargin" secondItem="LaA-uX-OgX" secondAttribute="trailing" id="I8w-uy-w4L"/>
                                                 <constraint firstItem="Jjc-jK-Vci" firstAttribute="centerX" secondItem="ecE-wE-iZx" secondAttribute="centerX" id="L1q-wp-a8Q"/>
                                                 <constraint firstItem="LaA-uX-OgX" firstAttribute="leading" secondItem="ecE-wE-iZx" secondAttribute="leadingMargin" id="Onq-kn-0ej"/>
+                                                <constraint firstItem="IQ3-3i-AaT" firstAttribute="centerX" secondItem="ecE-wE-iZx" secondAttribute="centerX" id="QpN-rx-5Nj"/>
+                                                <constraint firstItem="IQ3-3i-AaT" firstAttribute="centerY" secondItem="ecE-wE-iZx" secondAttribute="centerY" id="m0S-TM-PRN"/>
                                                 <constraint firstItem="Jjc-jK-Vci" firstAttribute="top" secondItem="ecE-wE-iZx" secondAttribute="top" constant="8" id="q5y-ys-POX"/>
                                             </constraints>
                                             <connections>
@@ -470,6 +476,7 @@
                     <connections>
                         <outlet property="basalRateHUD" destination="BEG-xe-e6y" id="VLC-vR-18C"/>
                         <outlet property="batteryLevelHUD" destination="ecE-wE-iZx" id="fCk-ia-gB2"/>
+                        <outlet property="batteryVoltage" destination="IQ3-3i-AaT" id="Xak-OD-WiV"/>
                         <outlet property="loopCompletionHUD" destination="H3C-gh-Vum" id="wJq-DI-Yo2"/>
                         <outlet property="reservoirVolumeHUD" destination="uVa-hu-HBZ" id="ZN7-sc-NjA"/>
                         <segue destination="Ykd-EQ-C1J" kind="show" identifier="CarbEntryTableViewController" id="cwl-Xe-ims"/>
