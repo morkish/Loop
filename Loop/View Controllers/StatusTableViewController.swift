@@ -446,20 +446,29 @@ class StatusTableViewController: UITableViewController, UIGestureRecognizerDeleg
             case .Glucose:
                 cell.chartTitle.text = "Glucose"
                 cell.chartCurrentVal.text = nil
-                /*
+                
+                //JML Add Current Glucose and Trend to Upper Right of Chart
+                var glucoseTrend: String
+                if let glucose = dataManager.latestGlucoseG5 {
+                    glucoseTrend = glucose.trendDescription
+                } else if let glucose = dataManager.latestGlucoseG4 {
+                    glucoseTrend = glucose.trendDescription
+                } else {
+                    glucoseTrend = ""
+                }
+                
                 if let glucoseStore = dataManager.glucoseStore, glucose = glucoseStore.latestGlucose {
                     
                     glucoseStore.preferredUnit { (unit, error) in
                         guard let unit = unit, glucoseString = self.numberFormatter.stringFromNumber(glucose.quantity.doubleValueForUnit(unit)) else {
                             return
                         }
-                        
                         dispatch_async(dispatch_get_main_queue()) {
-                            cell.chartCurrentVal.text = String(format: NSLocalizedString("%1$@ %2$@", comment: "Format string describing glucose: (1: quantity)(2: unit)"), glucoseString, unit.unitString)
+                            cell.chartCurrentVal.text = String(format: NSLocalizedString("%1$@", comment: "Format string describing glucose"), glucoseString + " " + glucoseTrend)
                         }
                     }
                 }
-                */
+ 
                 if let chart = charts.glucoseChartWithFrame(frame) {
                     cell.chartView = chart.view
                 } else {
