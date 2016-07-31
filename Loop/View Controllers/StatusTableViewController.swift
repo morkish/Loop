@@ -16,6 +16,7 @@ import SwiftCharts
 
 
 class StatusTableViewController: UITableViewController, UIGestureRecognizerDelegate {
+    @IBOutlet weak var currentGlucoseHUD: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -207,11 +208,12 @@ class StatusTableViewController: UITableViewController, UIGestureRecognizerDeleg
 
             reservoirVolume = dataManager.latestReservoirValue?.unitVolume
             
-			//x22 Pump Capacity Fill and Battery Percentage
+			//JML Pump Capacity Fill and Battery Pump Broadcast Percentage
             if let capacity = dataManager.pumpState?.pumpModel?.reservoirCapacity,
                 resVol = reservoirVolume {
                 reservoirLevel = min(1, max(0, Double(resVol / capacity)))
-                
+            
+                //JML Battery/PumpBroadcast Percentage
                 if dataManager.x22BatteryBroadcastRemaining > -1 {
                     
                     batteryLevel = dataManager.x22BatteryBroadcastRemaining
@@ -464,7 +466,9 @@ class StatusTableViewController: UITableViewController, UIGestureRecognizerDeleg
                             return
                         }
                         dispatch_async(dispatch_get_main_queue()) {
-                            cell.chartCurrentVal.text = String(format: NSLocalizedString("%1$@", comment: "Format string describing glucose"), glucoseString + " " + glucoseTrend)
+                            //cell.chartCurrentVal.text = String(format: NSLocalizedString("%1$@", comment: "Format string describing glucose"), glucoseString + " " + glucoseTrend)
+                            // JML Glucose Graphic on LoopHUD
+                            self.currentGlucoseHUD.text = glucoseString + " " + glucoseTrend
                         }
                     }
                 }

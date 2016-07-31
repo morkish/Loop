@@ -196,6 +196,15 @@
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="agu-6n-4Lf" customClass="LoopStateView" customModule="Loop" customModuleProvider="target">
                                                     <rect key="frame" x="53.5" y="8" width="44" height="44"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="-----" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="54" translatesAutoresizingMaskIntoConstraints="NO" id="W8M-S2-uc5" userLabel="CurrGlucoseVal">
+                                                            <rect key="frame" x="-5" y="13" width="54" height="18"/>
+                                                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.65102370689655176" colorSpace="calibratedRGB"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="44" id="47S-dl-aQ5"/>
@@ -477,6 +486,7 @@
                         <outlet property="basalRateHUD" destination="BEG-xe-e6y" id="VLC-vR-18C"/>
                         <outlet property="batteryLevelHUD" destination="ecE-wE-iZx" id="fCk-ia-gB2"/>
                         <outlet property="batteryVoltage" destination="IQ3-3i-AaT" id="Xak-OD-WiV"/>
+                        <outlet property="currentGlucoseHUD" destination="W8M-S2-uc5" id="b5i-8D-RT1"/>
                         <outlet property="loopCompletionHUD" destination="H3C-gh-Vum" id="wJq-DI-Yo2"/>
                         <outlet property="reservoirVolumeHUD" destination="uVa-hu-HBZ" id="ZN7-sc-NjA"/>
                         <segue destination="Ykd-EQ-C1J" kind="show" identifier="CarbEntryTableViewController" id="cwl-Xe-ims"/>
