@@ -468,7 +468,7 @@ class StatusTableViewController: UITableViewController, UIGestureRecognizerDeleg
                         dispatch_async(dispatch_get_main_queue()) {
                             //cell.chartCurrentVal.text = String(format: NSLocalizedString("%1$@", comment: "Format string describing glucose"), glucoseString + " " + glucoseTrend)
                             // JML Glucose Graphic on LoopHUD
-                            self.currentGlucoseHUD.text = glucoseString + " " + glucoseTrend
+                            self.currentGlucoseHUD.text = glucoseString + glucoseTrend
                         }
                     }
                 }
