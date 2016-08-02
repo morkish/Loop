@@ -374,7 +374,7 @@ class DeviceDataManager: CarbStoreDelegate, TransmitterDelegate, ReceiverDelegat
                 }
             }
             
-            // If this is an x22 pump read the battery here as well
+            // If this is an x22 pump read the battery here as well Lithium Ion Decay Schedule
             readBatteryVoltage { (result) in
                 switch result {
                 case .Success(let (voltage,status,date)):
