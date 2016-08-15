@@ -189,18 +189,31 @@
                                             <rect key="frame" x="0.0" y="0.0" width="150" height="70"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4 min ago" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="krM-Ky-OTb">
-                                                    <rect key="frame" x="8" y="55.5" width="134" height="14.5"/>
+                                                    <rect key="frame" x="8" y="56" width="134" height="14"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="agu-6n-4Lf" customClass="LoopStateView" customModule="Loop" customModuleProvider="target">
-                                                    <rect key="frame" x="53.5" y="8" width="44" height="44"/>
+                                                    <rect key="frame" x="53" y="8" width="44" height="44"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-----" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cCo-WJ-nNS" userLabel="currentGlucoseHUD">
+                                                            <rect key="frame" x="-5" y="15" width="52" height="21"/>
+                                                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.75" colorSpace="calibratedRGB"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="44" id="47S-dl-aQ5"/>
                                                         <constraint firstAttribute="width" secondItem="agu-6n-4Lf" secondAttribute="height" multiplier="1:1" id="8BL-j6-GYN"/>
+                                                        <constraint firstAttribute="trailing" secondItem="cCo-WJ-nNS" secondAttribute="trailing" constant="-3" id="8ej-78-1gx"/>
+                                                        <constraint firstItem="cCo-WJ-nNS" firstAttribute="leading" secondItem="agu-6n-4Lf" secondAttribute="leading" constant="-5" id="TK1-U1-ode"/>
+                                                        <constraint firstItem="cCo-WJ-nNS" firstAttribute="top" secondItem="agu-6n-4Lf" secondAttribute="top" constant="15" id="eBg-MP-Y8k"/>
                                                         <constraint firstAttribute="height" constant="44" id="l7p-V3-mbB"/>
+                                                        <constraint firstItem="cCo-WJ-nNS" firstAttribute="bottom" secondItem="agu-6n-4Lf" secondAttribute="bottomMargin" id="tkN-Hg-PPB"/>
                                                     </constraints>
                                                     <variation key="default">
                                                         <mask key="constraints">
@@ -322,10 +335,10 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jjc-jK-Vci">
-                                                    <rect key="frame" x="53.5" y="8" width="44" height="44"/>
+                                                    <rect key="frame" x="53" y="8" width="44" height="44"/>
                                                     <subviews>
                                                         <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="battery_unknown" translatesAutoresizingMaskIntoConstraints="NO" id="b1s-XV-TWG">
-                                                            <rect key="frame" x="8" y="0.5" width="27" height="44"/>
+                                                            <rect key="frame" x="8" y="0.0" width="27" height="44"/>
                                                         </imageView>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -433,6 +446,7 @@
                     <connections>
                         <outlet property="basalRateHUD" destination="BEG-xe-e6y" id="VLC-vR-18C"/>
                         <outlet property="batteryLevelHUD" destination="ecE-wE-iZx" id="fCk-ia-gB2"/>
+                        <outlet property="currentGlucoseHUD" destination="cCo-WJ-nNS" id="G1J-bn-DtC"/>
                         <outlet property="loopCompletionHUD" destination="H3C-gh-Vum" id="wJq-DI-Yo2"/>
                         <outlet property="reservoirVolumeHUD" destination="uVa-hu-HBZ" id="ZN7-sc-NjA"/>
                         <segue destination="Ykd-EQ-C1J" kind="show" identifier="CarbEntryTableViewController" id="cwl-Xe-ims"/>
