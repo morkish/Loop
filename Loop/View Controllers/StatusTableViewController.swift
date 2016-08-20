@@ -144,18 +144,6 @@ class StatusTableViewController: UITableViewController, UIGestureRecognizerDeleg
                         // TODO: Display error in the cell
                     } else {
                         self.charts.glucoseValues = values
-                        
-                        //jlucasvt Patch to Add Current Glucose and Trend to currentGlucoseHUD
-                        let glucoseTrend: String = self.dataManager.sensorInfo?.trendType?.description ?? ""
-                        
-                        if let glucoseStore = self.dataManager.glucoseStore, glucose = glucoseStore.latestGlucose {
-                            glucoseStore.preferredUnit { (unit, error) in
-                                guard let unit = unit, glucoseString = self.numberFormatter.stringFromNumber(glucose.quantity.doubleValueForUnit(unit)) else {
-                                    return
-                                }
-                                dispatch_async(dispatch_get_main_queue()) { self.currentGlucoseHUD.text = glucoseString + glucoseTrend }
-                            }
-                        }//End jlucasvt currentGlucose HUD Patch
                     }
 
                     dispatch_group_leave(reloadGroup)
