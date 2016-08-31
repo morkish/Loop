@@ -16,14 +16,14 @@ final class GlucoseHUDView: HUDView {
     @IBOutlet private var unitLabel: UILabel! {
         didSet {
             unitLabel?.text = "–"
-            unitLabel?.textColor = .glucoseTintColor
+            //unitLabel?.textColor = .glucoseTintColor
         }
     }
 
     @IBOutlet private var glucoseLabel: UILabel! {
         didSet {
             glucoseLabel?.text = "–"
-            glucoseLabel?.textColor = .glucoseTintColor
+            //glucoseLabel?.textColor = .glucoseTintColor
         }
     }
 

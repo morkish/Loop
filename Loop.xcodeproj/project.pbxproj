@@ -348,8 +348,6 @@
 		43EB40851C82646A00472A8C /* StatusChartManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusChartManager.swift; sourceTree = "<group>"; };
 		43EDDBF01C361C75007D89B5 /* CommonCrypto.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CommonCrypto.framework; path = Carthage/Build/iOS/CommonCrypto.framework; sourceTree = "<group>"; };
 		43EDDBF11C361C75007D89B5 /* xDripG5.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = xDripG5.framework; path = Carthage/Build/iOS/xDripG5.framework; sourceTree = "<group>"; };
-		43EDDBF51C361D24007D89B5 /* CommonCrypto.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = CommonCrypto.framework.dSYM; path = Carthage/Build/iOS/CommonCrypto.framework.dSYM; sourceTree = "<group>"; };
-		43EDDBF61C361D24007D89B5 /* xDripG5.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = xDripG5.framework.dSYM; path = Carthage/Build/iOS/xDripG5.framework.dSYM; sourceTree = "<group>"; };
 		43EDEE6B1CF2E12A00393BE3 /* Loop.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Loop.entitlements; sourceTree = "<group>"; };
 		43F41C321D3A17AA00C11ED6 /* ChartAxisValueDoubleUnit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartAxisValueDoubleUnit.swift; sourceTree = "<group>"; };
 		43F41C341D3B623800C11ED6 /* ChartPointsTouchHighlightLayerViewCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartPointsTouchHighlightLayerViewCache.swift; sourceTree = "<group>"; };
@@ -692,7 +690,6 @@
 				43B371871CE597D10013C5A6 /* ShareClient.framework */,
 				43F78D481C914197002152D1 /* CarbKit.framework */,
 				43EDDBF01C361C75007D89B5 /* CommonCrypto.framework */,
-				43EDDBF51C361D24007D89B5 /* CommonCrypto.framework.dSYM */,
 				4D3B40021D4A9DFE00BC6334 /* G4ShareSpy.framework */,
 				43F78D491C914197002152D1 /* GlucoseKit.framework */,
 				43F5C2C81B929C09003EB13D /* HealthKit.framework */,
@@ -703,7 +700,6 @@
 				43523EDA1CC35083001850F1 /* RileyLinkKit.framework */,
 				4346D1EF1C781BEA00ABAFE3 /* SwiftCharts.framework */,
 				43EDDBF11C361C75007D89B5 /* xDripG5.framework */,
-				43EDDBF61C361D24007D89B5 /* xDripG5.framework.dSYM */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

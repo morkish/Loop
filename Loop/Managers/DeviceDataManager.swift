@@ -302,7 +302,6 @@ final class DeviceDataManager: CarbStoreDelegate, TransmitterDelegate, ReceiverD
                     completion(.Failure(LoopError.ConfigurationError))
                     return
                 }
-
                 let battery = BatteryStatus(voltage: status.batteryVolts, status: BatteryIndicator(batteryStatus: status.batteryStatus))
                 
                 if let sentrySupported = self.pumpState?.pumpModel?.larger where !sentrySupported {
