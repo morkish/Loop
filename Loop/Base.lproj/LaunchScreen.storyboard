@@ -8,7 +8,7 @@
         <!--Navigation Controller-->
         <scene sceneID="Ucb-uj-Fzl">
             <objects>
-                <navigationController toolbarHidden="NO" id="c6k-8z-nla" sceneMemberID="viewController">
+                <navigationController navigationBarHidden="YES" toolbarHidden="NO" id="c6k-8z-nla" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" enabled="NO" title="" id="nfG-Bf-TrT"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="3rC-hS-Fnr">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
