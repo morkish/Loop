@@ -227,6 +227,7 @@ final class StatusTableViewController: UITableViewController, UIGestureRecognize
             if let capacity = dataManager.pumpState?.pumpModel?.reservoirCapacity,
                 resVol = reservoirVolume {
                 reservoirLevel = min(1, max(0, Double(resVol / Double(capacity))))
+                //jlucasvt x22 Battery Status Display
                 batteryLevel = dataManager.x22BatteryBroadcastRemaining
             }
 
@@ -741,7 +742,6 @@ final class StatusTableViewController: UITableViewController, UIGestureRecognize
     }
 
     // MARK: - HUDs
-    @IBOutlet weak var currentGlucoseHUD: UILabel!
 
     @IBOutlet var loopCompletionHUD: LoopCompletionHUDView!
 

@@ -322,15 +322,6 @@ final class DeviceDataManager: CarbStoreDelegate, DoseStoreDelegate, Transmitter
                     completion(.Failure(LoopError.ConfigurationError))
                     return
                 }
-                let battery = BatteryStatus(voltage: status.batteryVolts, status: BatteryIndicator(batteryStatus: status.batteryStatus))
-                
-                if let sentrySupported = self.pumpState?.pumpModel?.larger where !sentrySupported {
-                    self.setBatteryDataforNonMySentryPumps(status.batteryVolts)
-                }
-                
-                let nsPumpStatus = NightscoutUploadKit.PumpStatus(clock: date, pumpID: ops.pumpState.pumpID, iob: nil, battery: battery, suspended: status.suspended, bolusing: status.bolusing, reservoir: status.reservoir)
-                self.nightscoutDataManager.uploadDeviceStatus(nsPumpStatus)
-
                 completion(.Success(status: status, date: date))
             case .Failure(let error):
                 self.logger.addError("Failed to fetch pump status: \(error)", fromSource: "RileyLink")
@@ -339,6 +330,44 @@ final class DeviceDataManager: CarbStoreDelegate, DoseStoreDelegate, Transmitter
         }
     }
 
+    /**
+     Ensures pump data is current by either waking and polling, or ensuring we're listening to sentry packets.
+     */
+    private func assertCurrentPumpData() {
+        guard let device = rileyLinkManager.firstConnectedDevice else {
+            return
+        }
+
+        device.assertIdleListening()
+
+        // How long should we wait before we poll for new pump data?
+        let pumpStatusAgeTolerance = rileyLinkManager.idleListeningEnabled ? NSTimeInterval(minutes: 11) : NSTimeInterval(minutes: 4)
+
+        // If we don't yet have pump status, or it's old, poll for it.
+        if  doseStore.lastReservoirValue == nil ||
+            doseStore.lastReservoirValue!.startDate.timeIntervalSinceNow <= -pumpStatusAgeTolerance {
+            readPumpData { (result) in
+                let nsPumpStatus: NightscoutUploadKit.PumpStatus?
+                switch result {
+                case .Success(let (status, date)):
+                    self.updateReservoirVolume(status.reservoir, atDate: date, withTimeLeft: nil)
+                    let battery = BatteryStatus(voltage: status.batteryVolts, status: BatteryIndicator(batteryStatus: status.batteryStatus))
+                    
+                    //jlucasvt x22 Battery Status
+                    if let sentrySupported = self.pumpState?.pumpModel?.larger where !sentrySupported {
+                        self.setBatteryDataforNonMySentryPumps(status.batteryVolts)
+                    }
+                    nsPumpStatus = NightscoutUploadKit.PumpStatus(clock: date, pumpID: status.pumpID, iob: nil, battery: battery, suspended: status.suspended, bolusing: status.bolusing, reservoir: status.reservoir)
+                case .Failure(let error):
+                    self.troubleshootPumpCommsWithDevice(device)
+                    self.nightscoutDataManager.uploadLoopStatus(loopError: error)
+                    nsPumpStatus = nil
+                }
+                self.nightscoutDataManager.uploadDeviceStatus(nsPumpStatus)
+            }
+        }
+    }
+    
     /**
      jlucasvt
      x22 Battery Voltage, Lithium Decay Display, and Notifications.
@@ -377,39 +406,6 @@ final class DeviceDataManager: CarbStoreDelegate, DoseStoreDelegate, Transmitter
         self.batteryVoltage = voltage
         self.x22BatteryBroadcastRemaining = percentage
         
-    }
-    
-    /**
-     Ensures pump data is current by either waking and polling, or ensuring we're listening to sentry packets.
-     */
-    private func assertCurrentPumpData() {
-        guard let device = rileyLinkManager.firstConnectedDevice else {
-            return
-        }
-
-        device.assertIdleListening()
-
-        // How long should we wait before we poll for new pump data?
-        let pumpStatusAgeTolerance = rileyLinkManager.idleListeningEnabled ? NSTimeInterval(minutes: 11) : NSTimeInterval(minutes: 4)
-
-        // If we don't yet have pump status, or it's old, poll for it.
-        if  doseStore.lastReservoirValue == nil ||
-            doseStore.lastReservoirValue!.startDate.timeIntervalSinceNow <= -pumpStatusAgeTolerance {
-            readPumpData { (result) in
-                let nsPumpStatus: NightscoutUploadKit.PumpStatus?
-                switch result {
-                case .Success(let (status, date)):
-                    self.updateReservoirVolume(status.reservoir, atDate: date, withTimeLeft: nil)
-                    let battery = BatteryStatus(voltage: status.batteryVolts, status: BatteryIndicator(batteryStatus: status.batteryStatus))
-                    nsPumpStatus = NightscoutUploadKit.PumpStatus(clock: date, pumpID: status.pumpID, iob: nil, battery: battery, suspended: status.suspended, bolusing: status.bolusing, reservoir: status.reservoir)
-                case .Failure(let error):
-                    self.troubleshootPumpCommsWithDevice(device)
-                    self.nightscoutDataManager.uploadLoopStatus(loopError: error)
-                    nsPumpStatus = nil
-                }
-                self.nightscoutDataManager.uploadDeviceStatus(nsPumpStatus)
-            }
-        }
     }
 
     /**

@@ -154,16 +154,16 @@ struct DoseMath {
         }
 
         let eventualGlucose = glucose.last!
-        //let minGlucose = glucose.minElement { $0.quantity < $1.quantity }!
+        let minGlucose = glucose.minElement { $0.quantity < $1.quantity }!
 
         let eventualGlucoseTargets = glucoseTargetRange.valueAt(eventualGlucose.startDate)
         // Use between to opt-out of the override.
-        //let minGlucoseTargets = glucoseTargetRange.between(minGlucose.startDate, minGlucose.startDate).first!.value
+        let minGlucoseTargets = glucoseTargetRange.between(minGlucose.startDate, minGlucose.startDate).first!.value
 
-        //guard minGlucose.quantity.doubleValueForUnit(glucoseTargetRange.unit) >= minGlucoseTargets.minValue else {
-        //    return 0
-        //}
-        
+        guard minGlucose.quantity.doubleValueForUnit(glucoseTargetRange.unit) >= minGlucoseTargets.minValue else {
+            return 0
+        }
+
         let targetGlucose = eventualGlucoseTargets.maxValue
         let currentSensitivity = insulinSensitivity.quantityAt(date).doubleValueForUnit(glucoseTargetRange.unit)
 
