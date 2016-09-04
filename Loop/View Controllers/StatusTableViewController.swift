@@ -228,7 +228,7 @@ final class StatusTableViewController: UITableViewController, UIGestureRecognize
                 resVol = reservoirVolume {
                 reservoirLevel = min(1, max(0, Double(resVol / Double(capacity))))
                 //jlucasvt x22 Battery Status Display
-                batteryLevel = dataManager.x22BatteryBroadcastRemaining
+                if dataManager.x22BatteryBroadcastRemaining > 0 {batteryLevel = dataManager.x22BatteryBroadcastRemaining}
             }
 
             if let status = dataManager.latestPumpStatusFromMySentry {
