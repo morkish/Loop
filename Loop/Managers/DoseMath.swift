@@ -158,9 +158,10 @@ struct DoseMath {
 
         let eventualGlucoseTargets = glucoseTargetRange.valueAt(eventualGlucose.startDate)
         // Use between to opt-out of the override.
-        let minGlucoseTargets = glucoseTargetRange.between(minGlucose.startDate, minGlucose.startDate).first!.value
-
-        guard minGlucose.quantity.doubleValueForUnit(glucoseTargetRange.unit) >= minGlucoseTargets.minValue else {
+        // jlucasvt let minGlucoseTargets = glucoseTargetRange.between(minGlucose.startDate, minGlucose.startDate).first!.value
+        
+        // jlucasvt changes min glucose Targets to fixed value from "minGlucoseTargets.minValue"
+        guard minGlucose.quantity.doubleValueForUnit(glucoseTargetRange.unit) >= 75 else {
             return 0
         }
 
